@@ -196,7 +196,7 @@ export const PdfHighlighter = ({
   );
   const ghostHighlightRef = useRef<GhostHighlight | null>(null);
   const selectionRef = useRef<PdfSelection | null>(null);
-  const scrolledToHighlightIdRef = useRef<string | null>(null);
+  const scrolledToHighlightIdRef = useRef<number | -1>(-1);
   const isAreaSelectionInProgressRef = useRef(false);
   const isEditInProgressRef = useRef(false);
   const updateTipPositionRef = useRef(() => {});
@@ -273,7 +273,7 @@ export const PdfHighlighter = ({
   // Event listeners
   const handleScroll = () => {
     onScrollAway && onScrollAway();
-    scrolledToHighlightIdRef.current = null;
+    scrolledToHighlightIdRef.current = -1;
     renderHighlightLayers();
   };
 
@@ -312,10 +312,30 @@ export const PdfHighlighter = ({
     selectionRef.current = {
       content,
       position: scaledPosition,
+      title: '',
+      summary: '',
+      mindmap: '',
+      highlightType: '',
+      color: '',
+      emoji: '',
+      hasQuiz: false,
+      tags: [], 
+      rate: 0,
+      highlightOnly: false,
       makeGhostHighlight: () => {
         ghostHighlightRef.current = {
           content: content,
           position: scaledPosition,
+          title: '',
+          summary: '',
+          mindmap: '',
+          highlightType: '',
+          color: '',
+          emoji: '',
+          hasQuiz: false,
+          tags: [], 
+          rate: 0,
+          highlightOnly: false,
         };
 
         onCreateGhostHighlight &&
@@ -561,10 +581,30 @@ export const PdfHighlighter = ({
               selectionRef.current = {
                 content: { image },
                 position: scaledPosition,
+                title: '',
+                summary: '',
+                mindmap: '',
+                highlightType: '',
+                color: '',
+                emoji: '',
+                hasQuiz: false,
+                tags: [], 
+                rate: 0,
+                highlightOnly: false,
                 makeGhostHighlight: () => {
                   ghostHighlightRef.current = {
                     position: scaledPosition,
                     content: { image },
+                    title: '',
+                    summary: '',
+                    mindmap: '',
+                    highlightType: '',
+                    color: '',
+                    emoji: '',
+                    hasQuiz: false,
+                    tags: [], 
+                    rate: 0,
+                    highlightOnly: false,
                   };
                   onCreateGhostHighlight &&
                     onCreateGhostHighlight(ghostHighlightRef.current);

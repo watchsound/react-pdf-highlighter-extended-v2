@@ -55,7 +55,7 @@ const Sidebar = ({
             >
               <div>
                 {/* Highlight comment and text */}
-                <strong>{highlight.comment}</strong>
+                <strong>{highlight.summary}</strong>
                 {highlight.content.text && (
                   <blockquote style={{ marginTop: "0.5rem" }}>
                     {`${highlight.content.text.slice(0, 90).trim()}…`}

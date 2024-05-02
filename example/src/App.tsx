@@ -6,7 +6,7 @@ import HighlightContainer from "./HighlightContainer";
 import Sidebar from "./Sidebar";
 import Toolbar from "./Toolbar";
 import {
-  GhostHighlight,
+  //  GhostHighlight,
   Highlight,
   PdfHighlighter,
   PdfHighlighterUtils,
@@ -19,15 +19,15 @@ import { testHighlights as _testHighlights } from "./test-highlights";
 import { CommentedHighlight } from "./types";
 
 const TEST_HIGHLIGHTS = _testHighlights;
-const PRIMARY_PDF_URL = "https://arxiv.org/pdf/2203.11115.pdf";
-const SECONDARY_PDF_URL = "https://arxiv.org/pdf/1604.02480.pdf";
-const LONG_LOADING_PDF_URL =
-  "https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK";
+const PRIMARY_PDF_URL = "fastcheckingjs.pdf";
+const SECONDARY_PDF_URL = "fastcheckingjs.pdf"; // "https://arxiv.org/pdf/1604.02480.pdf";
+const LONG_LOADING_PDF_URL = "fastcheckingjs.pdf";
+ // "https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK";
 
-const getNextId = () => String(Math.random()).slice(2);
+const getNextId = () => parseInt(String(Math.random()).slice(2).substring(0,8));
 
 const parseIdFromHash = () => {
-  return document.location.hash.slice("#highlight-".length);
+  return parseInt(document.location.hash.slice("#highlight-".length));
 };
 
 const resetHash = () => {
@@ -84,9 +84,9 @@ const App = () => {
     });
   };
 
-  const addHighlight = (highlight: GhostHighlight, comment: string) => {
+  const addHighlight = (highlight: CommentedHighlight ) => {
     console.log("Saving highlight", highlight);
-    setHighlights([{ ...highlight, comment, id: getNextId() }, ...highlights]);
+    setHighlights([{ ...highlight,  id: typeof highlight.id === 'undefined' ||highlight.id < 0 ? getNextId() : highlight.id }, ...highlights]);
   };
 
   const deleteHighlight = (highlight: ViewportHighlight | Highlight) => {
@@ -95,7 +95,7 @@ const App = () => {
   };
 
   const editHighlight = (
-    idToUpdate: string,
+    idToUpdate: number,
     edit: Partial<CommentedHighlight>,
   ) => {
     console.log(`Editing highlight ${idToUpdate} with `, edit);
@@ -110,7 +110,7 @@ const App = () => {
     setHighlights([]);
   };
 
-  const getHighlightById = (id: string) => {
+  const getHighlightById = (id: number) => {
     return highlights.find((highlight) => highlight.id === id);
   };
 
@@ -122,9 +122,13 @@ const App = () => {
       position: highlight.position,
       content: (
         <CommentForm
-          placeHolder={highlight.comment}
-          onSubmit={(input) => {
-            editHighlight(highlight.id, { comment: input });
+          title={highlight.title}
+          summary={highlight.summary}
+          highlightType={highlight.highlightType}
+          color={highlight.color}
+          emoji={highlight.emoji} 
+          onSubmit={(title, summary, highlightType, color, emoji) => {
+            editHighlight(highlight.id, { title, summary, highlightType, color, emoji });
             highlighterUtilsRef.current!.setTip(null);
             highlighterUtilsRef.current!.toggleEditInProgress(false);
           }}

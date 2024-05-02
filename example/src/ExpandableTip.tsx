@@ -1,14 +1,15 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import CommentForm from "./CommentForm";
 import {
-  GhostHighlight,
+  // GhostHighlight,
   PdfSelection,
   usePdfHighlighterContext,
 } from "./react-pdf-highlighter-extended";
 import "./style/ExpandableTip.css";
+import { CommentedHighlight } from "./types";
 
 interface ExpandableTipProps {
-  addHighlight: (highlight: GhostHighlight, comment: string) => void;
+  addHighlight: (highlight: CommentedHighlight ) => void;
 }
 
 const ExpandableTip = ({ addHighlight }: ExpandableTipProps) => {
@@ -41,14 +42,23 @@ const ExpandableTip = ({ addHighlight }: ExpandableTipProps) => {
         </button>
       ) : (
         <CommentForm
-          placeHolder="Your comment..."
-          onSubmit={(input) => {
+          onSubmit={(title, summary, highlightType, color, emoji) => {
             addHighlight(
               {
+                id: -1,
                 content: selectionRef.current!.content,
                 position: selectionRef.current!.position,
-              },
-              input,
+                title: title || "",
+                summary: summary || "",
+                mindmap: "",
+                highlightType: highlightType || 'highlight',
+                color: color || 'info',
+                emoji: emoji || "",
+                hasQuiz: false,
+                tags: [],
+                rate: 0,
+                highlightOnly: false
+              }
             );
 
             removeGhostHighlight();

@@ -1,3 +1,22 @@
+# react-pdf-highlighter-extended-v2
+This is from project react-pdf-highlighter-extended which is forked from react-pdf-highlighter.
+just minor changes 
+1. react-pdf-highlighter-extended removed emoji which is supported by react-pdf-highlighter. i added it back.
+2. add some extra field to Highlight data model  
+3. add support for color setting and some built-in annotation types.
+colors:  
+  'primary',
+  'secondary',
+  'error',
+  'warning',
+  'info',
+  'success',
+annotations:
+  Highlight ,
+  Underline ,
+  StrikeLine ,
+  DashLine,
+
 # react-pdf-highlighter-extended
 
 [![Node.js CI](https://github.com/DanielArnould/react-pdf-highlighter-extended/actions/workflows/node.js.yml/badge.svg)](https://github.com/DanielArnould/react-pdf-highlighter-extended/actions/workflows/node.js.yml)

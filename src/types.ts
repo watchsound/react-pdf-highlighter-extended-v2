@@ -54,7 +54,7 @@ export type ViewportPosition = {
   /** Bounding rectangle for the entire highlight. */
   boundingRect: LTWHP;
   /** For text highlights, the rectangular highlights for each block of text. */
-  rects: Array<LTWHP>;
+  rects: Array<LTWHP>; 
 };
 
 /**
@@ -68,7 +68,7 @@ export type ScaledPosition = {
   /** For text highlights, the rectangular highlights for each block of text. */
   rects: Array<Scaled>;
   /** Rarely applicable property of whether coordinates should be in PDF coordinate space.  */
-  usePdfCoordinates?: boolean;
+  usePdfCoordinates?: boolean; 
 };
 
 /**
@@ -88,9 +88,19 @@ export type Content = {
  * @category Type
  */
 export interface Highlight {
-  id: string;
+  id: number;
   content: Content;
   position: ScaledPosition;
+  title: string;
+  summary: string; // summary from openai if not set
+  mindmap: string;
+  highlightType: string;
+  color: string;
+  emoji: string;
+  hasQuiz: boolean;
+  tags: string[];
+  rate: number;
+  highlightOnly: boolean;
 }
 
 /**

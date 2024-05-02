@@ -15,7 +15,7 @@ import {
   ViewportHighlight,
 } from "../types";
 
-const EMPTY_ID = "empty-id";
+const EMPTY_ID = -1;
 
 /**
  * The props type for {@link HighlightLayer}.
@@ -37,7 +37,7 @@ export interface HighlightLayerProps {
   /**
    * ID of the highlight that the parent PDF Highlighter is trying to autoscroll to.
    */
-  scrolledToHighlightId?: string | null;
+  scrolledToHighlightId?: number | -1;
 
   /**
    * The PDFViewer instance containing the HighlightLayer

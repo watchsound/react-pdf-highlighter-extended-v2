@@ -71,23 +71,40 @@ export const TextHighlight = ({
 }: TextHighlightProps) => {
   const highlightClass = isScrolledTo ? "TextHighlight--scrolledTo" : "";
   const { rects } = highlight.position;
-
+  const { highlightType, color, emoji } = highlight;
   return (
     <div
       className={`TextHighlight ${highlightClass}`}
       onContextMenu={onContextMenu}
     >
+      {emoji ? (
+        <div
+          className="TextHighlight__emoji"
+          style={{
+            left: 20,
+            top: rects[0].top,
+          }}
+        >
+          {emoji}
+        </div>
+      ) : null}
       <div className="TextHighlight__parts">
-        {rects.map((rect, index) => (
-          <div
-            onMouseOver={onMouseOver}
-            onMouseOut={onMouseOut}
-            onClick={onClick}
-            key={index}
-            style={{ ...rect, ...style }}
-            className={`TextHighlight__part`}
-          />
-        ))}
+        {rects.map((rect, index) => {
+          let { left, top,width, height } = rect;  
+          if (highlightType == 'underline') { top = top +height-1; height = 2; }
+          if (highlightType == 'dashline') { top = top +height-1; height = 0; }
+          if (highlightType == 'strikeline') { top = top +height/2; height = 2; }        
+          return (
+            <div
+              onMouseOver={onMouseOver}
+              onMouseOut={onMouseOut}
+              onClick={onClick}
+              key={index}
+              style={{ left, top, width, height, ...style }}
+              className={`TextHighlight__part TextHighlight__${highlightType || 'highlight'} TextHighlight__color_${color || 'info'}`}
+            />
+          )}
+        )}
       </div>
     </div>
   );

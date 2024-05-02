@@ -1,6 +1,6 @@
 {
-  "name": "react-pdf-highlighter-extended",
-  "version": "8.0.0",
+  "name": "react-pdf-highlighter-extended-x2",
+  "version": "8.0.1",
   "description": "Set of modern React components for PDF highlighting",
   "author": "Daniel Arnould <daniel.s.arnould@gmail.com>",
   "license": "MIT",
@@ -12,6 +12,10 @@
     {
       "name": "Artem Tyurin",
       "email": "artem.tyurin@gmail.com"
+    },
+     {
+      "name": "Hanning Ni",
+      "email": "grandteton@gmail.com"
     }
   ],
   "keywords": [
@@ -30,15 +34,16 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "(cd ./example && vite)",
-    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:copy-styles && npm run build:example && npm run build:docs",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:copy-styles-1 && npm run build:copy-styles-2 && npm run build:example && npm run build:docs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir ./dist/cjs",
-    "build:copy-styles": "cp -r ./src/style ./dist/esm && cp -r ./src/style ./dist/cjs",
-    "build:example": "(cd ./example && tsc && vite build && mkdir \"../public/\" && cp -r example-app ../public/)",
+    "build:copy-styles-1": "xcopy /s /e .\\src\\style\\* .\\dist\\esm\\",
+    "build:copy-styles-2": "xcopy /s /e .\\src\\style\\* .\\dist\\cjs",
+    "build:example": "(cd ./example && tsc && vite build && mkdir \"../public/\" && xcopy /s /e  example-app ..\\public\\)",
     "build:docs": "npx typedoc",
     "format": "prettier --write './**/*.{js,ts,tsx}'",
     "format:check": "prettier --check './**/*.{js,ts,tsx}'",
-    "clean": "rm -rf dist public"
+    "clean": "rmdir /s /q dist public"
   },
   "peerDependencies": {
     "react": "^18.2.0",

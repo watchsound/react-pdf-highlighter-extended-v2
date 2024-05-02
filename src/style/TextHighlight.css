@@ -9,10 +9,71 @@
 .TextHighlight__part {
   cursor: pointer;
   position: absolute;
-  background: rgba(255, 226, 143, 1);
-  transition: background 0.3s;
+  /** background: rgba(255, 226, 143, 1);
+  transition: background 0.3s; */
 }
 
 .TextHighlight--scrolledTo .TextHighlight__part {
   background: #ff4141;
+}
+
+.TextHighlight__emoji {
+  position: absolute;
+  color: black;
+  opacity: 1;
+  font-size: 16px;
+}
+
+
+.TextHighlight__popup {
+  background-color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: black;
+  padding: 0.2rem 0.2rem;
+  border-radius: 3px;
+  max-width: 400px;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.Highlight--scrolledTo .TextHighlight__part {
+  background: #ff4141;
+}
+
+.TextHighlight__color_primary {
+  background: #42a5f5;
+} 
+.TextHighlight__color_secondary{
+  background: #ba68c8;
+} 
+.TextHighlight__color_error{
+  background: #FF5733;
+} 
+.TextHighlight__color_warning{
+  background: #ff9800;
+} 
+.TextHighlight__color_info{
+  background: #3598db;
+} 
+.TextHighlight__color_success{
+  background: #82dd55;
+} 
+/* Highlight text with a yellow background */
+.TextHighlight__highlight {
+  /* background: rgba(255, 226, 143, 1); */
+  transition: background 0.3s;
+}
+
+/* Underline text with a solid line */
+.TextHighlight__underline { 
+}
+
+/* Strike through text with a solid line */
+.TextHighlight__strikeline {
+}
+
+/* Dashed underline */
+.TextHighlight__dashline {
+  border-bottom: 2px dashed;
+  height: 0px;
 }

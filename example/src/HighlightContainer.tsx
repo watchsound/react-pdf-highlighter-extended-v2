@@ -13,7 +13,7 @@ import { CommentedHighlight } from "./types";
 
 interface HighlightContainerProps {
   editHighlight: (
-    idToUpdate: string,
+    idToUpdate: number,
     edit: Partial<CommentedHighlight>,
   ) => void;
   onContextMenu?: (
